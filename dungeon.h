@@ -5,34 +5,26 @@
 
 using namespace std;
 
-struct clearD{
-    adrD info;
-    adrD next;
-};
-
 struct player{
     string playerName;
     int playerAge;
-    string inventory[5];
-    int playerRank;
+    string inventory[99];
+    string playerRank;
 };
 
 struct dungeon{
     string d_Name;
-    string d_Monster[5];
-    string reward[5];
-    string clearInfo;
+    string d_Monster[99];
+    string reward[99];
 };
 
 typedef struct player infotype1;
 typedef struct dungeon infotype2;
 typedef struct elmP *adrP;
 typedef struct elmD *adrD;
-typedef struct clearD infotype3;
 
 struct elmP{
     infotype1 info;
-    infotype3 clearD;
     adrP next;
 };
 
@@ -46,8 +38,18 @@ struct ListPlayer{
 };
 
 struct ListDungeon{
-    adrD first;
+    adrD first:
 };
 
+void createListPlayer (ListPlayer &P);
+adrP createElemenPlayer (infotype1 ip);
+void insertLastPlayer (ListPlayer &P, adrP ap);
+adr showPlayer (ListPlayer &P);
+void deleteLastPlayer ()
+adrP searchPlayer (ListPlayer P, string playerName);
+
+void createListDungeon (ListDungeon &D);
+adrD createElemenDungeon (infotype2 id);
+void insertLastDungeon (ListDungeon &D, adrD ad);
 
 #endif // DUNGEON_H_INCLUDED
