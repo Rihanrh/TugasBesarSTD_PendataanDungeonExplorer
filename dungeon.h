@@ -5,10 +5,16 @@
 
 using namespace std;
 
+struct clearD{
+    adrD info;
+    adrD next;
+};
+
 struct player{
-    string idName;
-    int idAge;
+    string playerName;
+    int playerAge;
     string inventory[5];
+    int playerRank;
 };
 
 struct dungeon{
@@ -18,6 +24,30 @@ struct dungeon{
     string clearInfo;
 };
 
-typedef struct
+typedef struct player infotype1;
+typedef struct dungeon infotype2;
+typedef struct elmP *adrP;
+typedef struct elmD *adrD;
+typedef struct clearD infotype3;
+
+struct elmP{
+    infotype1 info;
+    infotype3 clearD;
+    adrP next;
+};
+
+struct elmD{
+    infotype2 info;
+    adrD next;
+};
+
+struct ListPlayer{
+    adrP first;
+};
+
+struct ListDungeon{
+    adrD first;
+};
+
 
 #endif // DUNGEON_H_INCLUDED
