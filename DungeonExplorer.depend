@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1672119967 source:c:\users\dell\documents\github\tugasbesarstd_pendataandungeonexplorer\main.cpp
+
+1672120226 source:c:\users\dell\documents\github\tugasbesarstd_pendataandungeonexplorer\dungeon.cpp
+	"dungeon.h"
+
+1672120251 c:\users\dell\documents\github\tugasbesarstd_pendataandungeonexplorer\dungeon.h
+	<iostream>
+
