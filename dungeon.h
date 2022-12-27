@@ -11,7 +11,7 @@ struct player{
     string playerName;
     int playerAge;
     string inventory[99];
-    string playerRank;
+    int playerRank;
 };
 
 struct dungeon{
@@ -46,12 +46,16 @@ struct ListDungeon{
 void createListPlayer (ListPlayer &P);
 adrP createElemenPlayer (infotype1 ip);
 void insertLastPlayer (ListPlayer &P, adrP ap);
-void showPlayer (ListPlayer &P);
+void showPlayer (ListPlayer P);
 void deleteLastPlayer (ListPlayer &P, adrP delp);
 adrP searchPlayer(ListPlayer P, string playerName);
 
 void createListDungeon (ListDungeon &D);
 adrD createElemenDungeon (infotype2 id);
 void insertLastDungeon (ListDungeon &D, adrD ad);
+
+
+bool cekInventoryEmpty(string inventory[99]);
+int menu();
 
 #endif // DUNGEON_H_INCLUDED
