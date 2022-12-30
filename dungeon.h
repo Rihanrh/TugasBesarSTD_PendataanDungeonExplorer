@@ -56,6 +56,7 @@ void createListDungeon (ListDungeon &D);
 adrD createElemenDungeon (infotype2 id);
 //void insertLastDungeon (ListDungeon &D, adrD ad);
 void insertDungeon(ListPlayer &P, string playerName, adrD ad);
+int countDungeon(ListPlayer P, string playerName, adrD ad);
 
 void showAll(ListPlayer P, ListDungeon D);
 bool cekInventoryEmpty(string inventory[99]);

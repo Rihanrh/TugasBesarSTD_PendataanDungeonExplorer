@@ -189,7 +189,7 @@ void showAll(ListPlayer P, ListDungeon D){
 
         //+++++++++++++++++++++++++BAGIAN DUNGEON++++++++++++++++++++
         cout<<"    Dungeon yang telah diexplore oleh "<<info(ap).playerName<<endl;
-        adrD ad = first(D);
+        adrD ad = nextPD(ap);
         while(ad != NULL){
             cout<<"\t Nama Dungeon: "<<info(ad).d_Name<<endl;
 
@@ -214,6 +214,29 @@ void showAll(ListPlayer P, ListDungeon D){
         ap = next(ap);
     }
 }
+
+
+// Banyak Dungeon Pada Player tertentu
+
+int countDungeon(ListPlayer P, string playerName, adrD ad){
+    adrP SP = searchPlayer(P, playerName);
+    adrD D;
+    int i = 0;
+
+    ad = nextPD(SP);
+    if (nextPD(SP) == NULL){
+        nextPD(SP) = ad;
+    }else{
+        while (next(D) != NULL){
+            i++;
+            D = next(D);
+        }
+        next(D) = ad;
+    }
+    return i;
+}
+
+
 
 //=============================================Menu=============================================
 

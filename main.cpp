@@ -6,7 +6,7 @@ int main()
     ListDungeon D;
     createListPlayer(P);
     createListDungeon(D);
-    int N, i = 0, monsterN, rewardN;
+    int N, i = 0, monsterN, rewardN, banyakDungeon;
     infotype1 ip;
     infotype2 id;
     string playerName;
@@ -80,6 +80,11 @@ int main()
         }else if (gamemenu == 5){
             showAll(P, D);
             cout<<endl;
+        }else if (gamemenu == 7){
+            cout<<"   Input Player yang melakukan explorasi"<<endl;
+            cout<<"   Nama: ";
+            cin>>playerName;
+            countDungeon = countDungeon(P, playerName, ad)
         }
         gamemenu = menu();
     }
