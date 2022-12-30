@@ -91,6 +91,5 @@ int main()
     cout<<"  +----------------------------------------+"<<endl;
     cout<<"  |   Pendataan Dungeon Explorer Berakhir  |"<<endl;
     cout<<"  +----------------------------------------+"<<endl;
-
     return 0;
 }
