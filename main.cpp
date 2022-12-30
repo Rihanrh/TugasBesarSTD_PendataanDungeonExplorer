@@ -13,6 +13,7 @@ int main()
 
     adrP ap, delp;
     adrD ad;
+    int temp;
 
     int gamemenu = menu();
 
@@ -84,7 +85,7 @@ int main()
             cout<<"   Input Player yang melakukan explorasi"<<endl;
             cout<<"   Nama: ";
             cin>>playerName;
-            countDungeon = countDungeon(P, playerName, ad)
+            temp = countDungeon(P, playerName, ad);
         }
         gamemenu = menu();
     }

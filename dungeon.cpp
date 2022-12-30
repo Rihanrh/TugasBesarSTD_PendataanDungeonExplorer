@@ -146,16 +146,14 @@ bool cekRewardEmpty(string reward[99]){
 //Memasukkan Dungeon pada Player yang dituju
 void insertDungeon(ListPlayer &P, string playerName, adrD ad){
     adrP SP = searchPlayer(P, playerName);
-    adrD D;
 
-    ad = nextPD(SP);
     if (nextPD(SP) == NULL){
         nextPD(SP) = ad;
     }else{
-        while (next(D) != NULL){
-            D = next(D);
+        while (next(SP) != NULL){
+            SP = next(SP);
         }
-        next(D) = ad;
+        nextPD(SP) = ad;
     }
 }
 
