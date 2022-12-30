@@ -4,6 +4,7 @@
 using namespace std;
 #define info(P) (P)->info
 #define next(P) (P)->next
+#define nextPD(P) (P)->nextPD
 #define first(L) ((L).first)
 
 
@@ -28,6 +29,7 @@ typedef struct elmD *adrD;
 struct elmP{
     infotype1 info;
     adrP next;
+    adrD nextPD;
 };
 
 struct elmD{
@@ -52,10 +54,12 @@ adrP searchPlayer(ListPlayer P, string playerName);
 
 void createListDungeon (ListDungeon &D);
 adrD createElemenDungeon (infotype2 id);
-void insertLastDungeon (ListDungeon &D, adrD ad);
+//void insertLastDungeon (ListDungeon &D, adrD ad);
+void insertDungeon(ListPlayer &P, string playerName, adrD ad);
 
-
+void showAll(ListPlayer P, ListDungeon D);
 bool cekInventoryEmpty(string inventory[99]);
+bool cekRewardEmpty(string reward[99]);
 int menu();
 
 #endif // DUNGEON_H_INCLUDED
