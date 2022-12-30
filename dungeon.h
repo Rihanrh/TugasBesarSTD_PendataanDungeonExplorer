@@ -11,7 +11,6 @@ using namespace std;
 struct player{
     string playerName;
     int playerAge;
-    string inventory[99];
     int playerRank;
 };
 
@@ -54,13 +53,10 @@ adrP searchPlayer(ListPlayer P, string playerName);
 
 void createListDungeon (ListDungeon &D);
 adrD createElemenDungeon (infotype2 id);
-//void insertLastDungeon (ListDungeon &D, adrD ad);
 void insertDungeon(ListPlayer &P, string playerName, adrD ad);
 int countDungeon(ListPlayer P, string playerName, adrD ad);
 
 void showAll(ListPlayer P, ListDungeon D);
-bool cekInventoryEmpty(string inventory[99]);
-bool cekRewardEmpty(string reward[99]);
 int menu();
 
 #endif // DUNGEON_H_INCLUDED

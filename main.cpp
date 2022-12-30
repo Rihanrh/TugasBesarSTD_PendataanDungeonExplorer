@@ -13,7 +13,6 @@ int main()
 
     adrP ap, delp;
     adrD ad;
-    int temp;
 
     int gamemenu = menu();
 
@@ -82,10 +81,12 @@ int main()
             showAll(P, D);
             cout<<endl;
         }else if (gamemenu == 7){
-            cout<<"   Input Player yang melakukan explorasi"<<endl;
+            cout<<"   Input Player yang melakukan eksplorasi"<<endl;
             cout<<"   Nama: ";
             cin>>playerName;
-            temp = countDungeon(P, playerName, ad);
+            banyakDungeon = countDungeon(P, playerName, ad);
+            cout<<"Banyak dungeon yang telah dieksplorasi adalah: "<<banyakDungeon;
+            cout<<endl;
         }
         gamemenu = menu();
     }
