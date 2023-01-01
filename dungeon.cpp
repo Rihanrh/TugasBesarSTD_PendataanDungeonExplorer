@@ -243,7 +243,7 @@ void deleteLastDungeon(ListPlayer &P, string playerName, adrD ad){
     adrP SP = searchPlayer(P, playerName);
 
     adrD delD = nextPD(SP);
-    while (next(delD) != NULL){
+    while (next(next(delD)) != NULL){
         delD = next(delD);
     }
     ad = next(delD);
