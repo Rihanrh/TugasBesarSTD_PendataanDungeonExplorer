@@ -53,10 +53,13 @@ adrP searchPlayer(ListPlayer P, string playerName);
 
 void createListDungeon (ListDungeon &D);
 adrD createElemenDungeon (infotype2 id);
-void insertDungeon(ListPlayer &P, string playerName, adrD ad);
+void insertDungeon(ListDungeon &D, adrD ad);
 int countDungeon(ListPlayer P, string playerName, adrD ad);
+adrD searchDungeon(ListDungeon D, string d_Name);
 
-void showAll(ListPlayer P, ListDungeon D);
+void connectPlayerDungeon(ListPlayer &P, ListDungeon D, string playerName, string d_Name);
+
+void showAll(ListPlayer P);
 int menu();
 
 #endif // DUNGEON_H_INCLUDED

@@ -9,7 +9,7 @@ int main()
     int N, i = 0, monsterN, rewardN, banyakDungeon;
     infotype1 ip;
     infotype2 id;
-    string playerName;
+    string playerName, d_Name;
 
     adrP ap, delp;
     adrD ad;
@@ -50,9 +50,6 @@ int main()
             cout<<endl;
 
         }else if (gamemenu == 4){
-            cout<<"   Input Player yang melakukan explorasi"<<endl;
-            cout<<"   Nama: ";
-            cin>>playerName;
             cout<<"\t Data Dungeon"<<endl;
             cout<<"\t Nama Dungeon: ";
             cin>>id.d_Name;
@@ -74,11 +71,20 @@ int main()
             }
 
             ad = createElemenDungeon(id);
-            insertDungeon(P, playerName, ad);
+            insertDungeon(D, ad);
             cout<<endl;
-
         }else if (gamemenu == 5){
-            showAll(P, D);
+            cout<<"   Input Player yang melakukan eksplorasi"<<endl;
+            cout<<"   Nama Player: ";
+            cin>>playerName;
+            cout<<"   Input Dungeon yang di eksplorasi"<<endl;
+            cout<<"   Nama Dungeon: ";
+            cin>>d_Name;
+            connectPlayerDungeon(P, D, playerName, d_Name);
+            cout<<"Player "<<playerName<<" Telah mengeksplorasi dungeon "<<d_Name<<endl;
+
+        }else if (gamemenu == 6){
+            showAll(P);
             cout<<endl;
         }else if (gamemenu == 7){
             cout<<"   Input Player yang melakukan eksplorasi"<<endl;
