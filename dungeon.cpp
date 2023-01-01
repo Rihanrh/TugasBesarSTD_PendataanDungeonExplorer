@@ -56,7 +56,7 @@ void showPlayer (ListPlayer P){
         }else{
             cout<<"Tidak ada Rank."<<endl;
         }
-        cout<<endl;
+        cout<<endl<<endl;
         i++;
         p = next(p);
     }
@@ -184,36 +184,40 @@ void showAll(ListPlayer P){
             cout<<endl;
 
             //+++++++++++++++++++++++++BAGIAN DUNGEON++++++++++++++++++++
-            cout<<"Dungeon yang telah diexplore oleh "<<info(ap).playerName<<endl;
             adrD ad = nextPD(ap);
 
-            while(ad != NULL){
-                cout<<"Nama Dungeon: "<<info(ad).d_Name<<endl;
+            if (nextPD(ap) == NULL){
+                cout<<"Player "<<info(ap).playerName<<" tidak melakukan explorasi dungeon."<<endl;
+            }else{
+                cout<<"Dungeon yang telah diexplore oleh "<<info(ap).playerName<<endl;
+                while(ad != NULL){
+                    cout<<"Nama Dungeon: "<<info(ad).d_Name<<endl;
 
-                cout<<"Monster: ";
-                for (int j = 0; j < 99; j++){
-                    if (info(ad).d_Monster[j] != ""){
-                        cout<<info(ad).d_Monster[j]<<" ";
-                    }else{
-                        break;
-                    }
-                }
-
-                //Pengecekan Reward Dungeon ada atau tidak
-                if (!cekRewardEmpty(info(ad).reward)){
-                    cout<<endl<<"Reward: ";
-                    for (int k = 0; k < 99; k++){
-                        if (info(ad).reward[k] != ""){
-                            cout<<info(ad).reward[k]<<" ";
+                    cout<<"Monster: ";
+                    for (int j = 0; j < 99; j++){
+                        if (info(ad).d_Monster[j] != ""){
+                            cout<<info(ad).d_Monster[j]<<" ";
                         }else{
                             break;
                         }
                     }
-                }else{
-                    cout<<"Reward: -";
+
+                    //Pengecekan Reward Dungeon ada atau tidak
+                    if (!cekRewardEmpty(info(ad).reward)){
+                        cout<<endl<<"Reward: ";
+                        for (int k = 0; k < 99; k++){
+                            if (info(ad).reward[k] != ""){
+                                cout<<info(ad).reward[k]<<" ";
+                            }else{
+                                break;
+                            }
+                        }
+                    }else{
+                        cout<<"Reward: -";
+                    }
+                    cout<<endl<<endl;
+                    ad = next(ad);
                 }
-                cout<<endl;
-                ad = next(ad);
             }
             cout<<endl<<"##########################################"<<endl;
             cout<<endl;
@@ -243,12 +247,20 @@ void deleteLastDungeon(ListPlayer &P, string playerName, adrD ad){
     adrP SP = searchPlayer(P, playerName);
 
     adrD delD = nextPD(SP);
-    while (next(next(delD)) != NULL){
-        delD = next(delD);
+    if (nextPD(SP) != NULL){
+        if (next(delD) == NULL){
+            nextPD(SP) = NULL;
+        }else{
+            while (next(next(delD)) != NULL){
+                delD = next(delD);
+            }
+            ad = next(delD);
+            next(delD) = NULL;
+        }
+        cout<<"Dungeon terakhir yang telah dieksplorasi oleh "<<playerName<<" telah dihapus."<<endl;
+    }else{
+        cout<<"Tidak ada Dungeon!"<<endl;
     }
-    ad = next(delD);
-    next(delD) = next(ad);
-    next(ad) = NULL;
 }
 
 // Menghubungkan data Player ke data Dungeon

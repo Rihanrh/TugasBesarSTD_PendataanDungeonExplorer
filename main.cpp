@@ -85,13 +85,14 @@ int main()
         }else if (gamemenu == 6){
             showAll(P);
             cout<<endl;
+
         }else if (gamemenu == 7){
             cout<<"Input Player yang melakukan eksplorasi"<<endl;
             cout<<"Nama Player: ";
             cin>>playerName;
             deleteLastDungeon(P, playerName, ad);
-            cout<<"Dungeon terakhir yang telah dieksplorasi oleh "<<playerName<<" telah dihapus."<<endl;
             cout<<endl;
+
         }else if (gamemenu == 8){
             cout<<"Input Player yang melakukan eksplorasi"<<endl;
             cout<<"Nama: ";
