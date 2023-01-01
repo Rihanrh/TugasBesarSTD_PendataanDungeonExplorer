@@ -11,6 +11,7 @@ void createListPlayer (ListPlayer &P){
 adrP createElemenPlayer (infotype1 ip){
     adrP p = new elmP;
     info(p) = ip;
+    nextPD(p) = NULL;
     next(p) = NULL;
     return p;
 };
@@ -19,10 +20,10 @@ adrP createElemenPlayer (infotype1 ip){
 void insertLastPlayer (ListPlayer &P, adrP ap){
     if (first(P) == NULL){
         first(P) = ap;
-        }else{
-            adrP p = first(P);
-            while (next(p) != NULL){
-                p = next(p);
+    }else{
+        adrP p = first(P);
+        while (next(p) != NULL){
+            p = next(p);
         }
         next(p) = ap;
     }
@@ -33,15 +34,27 @@ void showPlayer (ListPlayer P){
     adrP p = first(P);
     int i = 1;
     while(p != NULL){
-        cout<<"\t Data Player "<<i<<endl;
-        cout<<"\t Nama: "<<info(p).playerName<<endl;
-        cout<<"\t Umur: "<<info(p).playerAge<<endl;
+        cout<<"Data Player "<<i<<endl;
+        cout<<"Nama: "<<info(p).playerName<<endl;
+        cout<<"Umur: "<<info(p).playerAge<<endl;
+
+        string playerName;
+        playerName = info(p).playerName;
+        adrD rd;
+        int rankCount = countDungeon(P, playerName, rd);
 
         //Pengecekan memiliki rank atau tidak
-        if (info(p).playerRank != 0){
-            cout<<"\t Rank: "<<info(p).playerRank<<endl;
+        if (rankCount != 0){
+            cout<<"Rank: ";
+            if (rankCount == 1){
+                cout<<"Bronze";
+            }else if (rankCount == 2){
+                cout<<"Silver";
+            }else if (rankCount >= 3){
+                cout<<"Gold";
+            }
         }else{
-            cout<<"\t Tidak ada Rank."<<endl;
+            cout<<"Tidak ada Rank."<<endl;
         }
         cout<<endl;
         i++;
@@ -109,6 +122,7 @@ bool cekRewardEmpty(string reward[99]){
     return true;
 }
 
+//Pencarian Dungeon
 adrD searchDungeon(ListDungeon D, string d_Name){
     if (first(D) != NULL){
         adrD ad = first(D);
@@ -134,6 +148,7 @@ void insertDungeon(ListDungeon &D, adrD ad){
     }
 }
 
+// Menampilkan semua data
 void showAll(ListPlayer P){
     if (first(P) == NULL){
         cout<<"Data Player dan Dungeon kosong."<<endl;
@@ -142,27 +157,40 @@ void showAll(ListPlayer P){
         int i = 1;
         while(ap != NULL){
             //++++++++++++++++++++++++++BAGIAN PLAYER+++++++++++++++++++
-            cout<<"  ##########################################"<<endl;
-            cout<<"\t Data Player "<<i<<endl;
-            cout<<"\t Nama: "<<info(ap).playerName<<endl;
-            cout<<"\t Umur: "<<info(ap).playerAge<<endl;
+            cout<<"##########################################"<<endl;
+            cout<<"Data Player "<<i<<endl;
+            cout<<"Nama: "<<info(ap).playerName<<endl;
+            cout<<"Umur: "<<info(ap).playerAge<<endl;
+
+            string playerName;
+            playerName = info(ap).playerName;
+            adrD rd;
+            int rankCount = countDungeon(P, playerName, rd);
 
             //Pengecekan memiliki rank atau tidak
-            if (info(ap).playerRank != 0){
-                cout<<"\t Rank: "<<info(ap).playerRank<<endl;
+            if (rankCount != 0){
+                cout<<"Rank: ";
+                if (rankCount == 1){
+                    cout<<"Bronze";
+                }else if (rankCount == 2){
+                    cout<<"Silver";
+                }else if (rankCount >= 3){
+                    cout<<"Gold";
+                }
+                cout<<endl;
             }else{
-                cout<<"\t Tidak ada Rank."<<endl;
+                cout<<"Tidak ada Rank."<<endl;
             }
             cout<<endl;
 
             //+++++++++++++++++++++++++BAGIAN DUNGEON++++++++++++++++++++
-            cout<<"    Dungeon yang telah diexplore oleh "<<info(ap).playerName<<endl;
+            cout<<"Dungeon yang telah diexplore oleh "<<info(ap).playerName<<endl;
             adrD ad = nextPD(ap);
 
             while(ad != NULL){
-                cout<<"\t Nama Dungeon: "<<info(ad).d_Name<<endl;
+                cout<<"Nama Dungeon: "<<info(ad).d_Name<<endl;
 
-                cout<<"\t Monster: ";
+                cout<<"Monster: ";
                 for (int j = 0; j < 99; j++){
                     if (info(ad).d_Monster[j] != ""){
                         cout<<info(ad).d_Monster[j]<<" ";
@@ -173,7 +201,7 @@ void showAll(ListPlayer P){
 
                 //Pengecekan Reward Dungeon ada atau tidak
                 if (!cekRewardEmpty(info(ad).reward)){
-                    cout<<endl<<"\t Reward: ";
+                    cout<<endl<<"Reward: ";
                     for (int k = 0; k < 99; k++){
                         if (info(ad).reward[k] != ""){
                             cout<<info(ad).reward[k]<<" ";
@@ -182,11 +210,12 @@ void showAll(ListPlayer P){
                         }
                     }
                 }else{
-                    cout<<"\t Reward: -";
+                    cout<<"Reward: -";
                 }
+                cout<<endl;
                 ad = next(ad);
             }
-            cout<<endl<<"  ##########################################"<<endl;
+            cout<<endl<<"##########################################"<<endl;
             cout<<endl;
             i++;
             ap = next(ap);
@@ -207,6 +236,19 @@ int countDungeon(ListPlayer P, string playerName, adrD ad){
     }
 
     return i;
+}
+
+// Menghapus Dungeon pada Player tertentu
+void deleteLastDungeon(ListPlayer &P, string playerName, adrD &ad){
+    adrP SP = searchPlayer(P, playerName);
+
+    adrD delD = nextPD(SP);
+    while (next(delD) != NULL){
+        delD = next(delD);
+    }
+    ad = next(delD);
+    next(delD) = next(ad);
+    next(ad) = NULL;
 }
 
 // Menghubungkan data Player ke data Dungeon
@@ -233,19 +275,20 @@ void connectPlayerDungeon(ListPlayer &P, ListDungeon D, string playerName, strin
 //=============================================Menu=============================================
 
 int menu(){
-    cout<<"  +----------------------------------------+"<<endl;
-    cout<<"  |       Pendataan Dungeon Explorer       |"<<endl;
-    cout<<"  +----------------------------------------+"<<endl;
-    cout<<"  | 1. Masukkan data Player                |"<<endl;
-    cout<<"  | 2. Hapus Player terakhir               |"<<endl;
-    cout<<"  | 3. Tampilkan data Player               |"<<endl;
-    cout<<"  | 4. Masukkan data Dungeon               |"<<endl;
-    cout<<"  | 5. Menghubungkan data Player & Dungeon |"<<endl;
-    cout<<"  | 6. Menampilkan Dungeon Explorer        |"<<endl;
-    cout<<"  | 7. Menghitung Dungeon pada Player      |"<<endl;
-    cout<<"  | 0. Exit                                |"<<endl;
-    cout<<"  +----------------------------------------+"<<endl;
-    cout<<"               Pilihan Menu: ";
+    cout<<"+----------------------------------------+"<<endl;
+    cout<<"|       Pendataan Dungeon Explorer       |"<<endl;
+    cout<<"+----------------------------------------+"<<endl;
+    cout<<"1. Masukkan data Player                "<<endl;
+    cout<<"2. Tampilkan data Player               "<<endl;
+    cout<<"3. Hapus Player terakhir               "<<endl;
+    cout<<"4. Masukkan data Dungeon               "<<endl;
+    cout<<"5. Menghubungkan data Player & Dungeon "<<endl;
+    cout<<"6. Menampilkan Dungeon Explorer        "<<endl;
+    cout<<"7. Menghapus Dungeon terakhir yang telah dieksplorasi player tertentu"<<endl;
+    cout<<"8. Menghitung Dungeon pada Player      "<<endl;
+    cout<<"0. Exit                                "<<endl;
+    cout<<"+----------------------------------------+"<<endl;
+    cout<<"            Pilihan Menu: ";
 
     int input = 0;
     cin >> input;

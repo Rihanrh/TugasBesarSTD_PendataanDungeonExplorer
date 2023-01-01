@@ -6,7 +6,7 @@ int main()
     ListDungeon D;
     createListPlayer(P);
     createListDungeon(D);
-    int N, i = 0, monsterN, rewardN, banyakDungeon;
+    int N, monsterN, rewardN, banyakDungeon;
     infotype1 ip;
     infotype2 id;
     string playerName, d_Name;
@@ -18,54 +18,53 @@ int main()
 
     while (gamemenu != 0){
         cout<<endl;
-        cout<<"  +----------------------------------------+"<<endl;
-        cout<<"  |         Anda memilih Menu: "<<gamemenu<<"           |"<<endl;
-        cout<<"  +----------------------------------------+"<<endl;
+        cout<<"+----------------------------------------+"<<endl;
+        cout<<"|         Anda memilih Menu: "<<gamemenu<<"           |"<<endl;
+        cout<<"+----------------------------------------+"<<endl;
 
         if (gamemenu == 1){
-            cout<<"\t Input Data Player"<<endl;
-            cout<<"\t Banyak Player: ";
+            cout<<"Input Data Player"<<endl;
+            cout<<"Banyak Player: ";
             cin>>N;
             cout<<endl;
-            while (i < N){
-                cout<<"\t Nama Player: ";
+            for (int i = 0; i < N; i++){
+                cout<<"Nama Player: ";
                 cin>>ip.playerName;
-                cout<<"\t Umur Player: ";
+                cout<<"Umur Player: ";
                 cin>>ip.playerAge;
                 ip.playerRank = 0;
                 ap = createElemenPlayer(ip);
                 insertLastPlayer(P, ap);
-                i++;
                 cout<<endl;
             }
             cout<<endl;
 
         }else if (gamemenu == 2){
-            deleteLastPlayer(P, delp);
-            cout<<"   Player terakhir telah dihapus dari data."<<endl;
-            cout<<endl;
-
-        }else if (gamemenu == 3){
             showPlayer(P);
             cout<<endl;
 
+        }else if (gamemenu == 3){
+            deleteLastPlayer(P, delp);
+            cout<<"Player terakhir telah dihapus dari data."<<endl;
+            cout<<endl;
+
         }else if (gamemenu == 4){
-            cout<<"\t Data Dungeon"<<endl;
-            cout<<"\t Nama Dungeon: ";
+            cout<<"Data Dungeon"<<endl;
+            cout<<"Nama Dungeon: ";
             cin>>id.d_Name;
 
-            cout<<"\t Monster di dalam Dungeon"<<endl;
-            cout<<"\t Banyak Monster: ";
+            cout<<"Monster di dalam Dungeon"<<endl;
+            cout<<"Banyak Monster: ";
             cin>>monsterN;
-            cout<<"\t Nama Monster: ";
+            cout<<"Nama Monster: ";
             for (int mn = 0; mn < monsterN; mn++){
                 cin>>id.d_Monster[mn];
             }
 
-            cout<<"\t Reward dari Dungeon"<<endl;
-            cout<<"\t Banyak Reward: ";
+            cout<<"Reward dari Dungeon"<<endl;
+            cout<<"Banyak Reward: ";
             cin>>rewardN;
-            cout<<"\t Nama Reward: ";
+            cout<<"Nama Reward: ";
             for (int rn = 0; rn < rewardN; rn++){
                 cin>>id.reward[rn];
             }
@@ -74,25 +73,32 @@ int main()
             insertDungeon(D, ad);
             cout<<endl;
         }else if (gamemenu == 5){
-            cout<<"   Input Player yang melakukan eksplorasi"<<endl;
-            cout<<"   Nama Player: ";
+            cout<<"Input Player yang melakukan eksplorasi"<<endl;
+            cout<<"Nama Player: ";
             cin>>playerName;
-            cout<<"   Input Dungeon yang di eksplorasi"<<endl;
-            cout<<"   Nama Dungeon: ";
+            cout<<"Input Dungeon yang di eksplorasi"<<endl;
+            cout<<"Nama Dungeon: ";
             cin>>d_Name;
             connectPlayerDungeon(P, D, playerName, d_Name);
-            cout<<"Player "<<playerName<<" Telah mengeksplorasi dungeon "<<d_Name<<endl;
+            cout<<"Player "<<playerName<<" Telah mengeksplorasi dungeon "<<d_Name<<endl<<endl;
 
         }else if (gamemenu == 6){
             showAll(P);
             cout<<endl;
         }else if (gamemenu == 7){
-            cout<<"   Input Player yang melakukan eksplorasi"<<endl;
-            cout<<"   Nama: ";
+            cout<<"Input Player yang melakukan eksplorasi"<<endl;
+            cout<<"Nama Player: ";
+            cin>>playerName;
+            deleteLastDungeon(P, playerName, ad);
+            cout<<"Dungeon terakhir yang telah dieksplorasi oleh "<<playerName<<" telah dihapus."<<endl;
+            cout<<endl;
+        }else if (gamemenu == 8){
+            cout<<"Input Player yang melakukan eksplorasi"<<endl;
+            cout<<"Nama: ";
             cin>>playerName;
             banyakDungeon = countDungeon(P, playerName, ad);
             cout<<"Banyak dungeon yang telah dieksplorasi adalah: "<<banyakDungeon;
-            cout<<endl;
+            cout<<endl<<endl;
         }
         gamemenu = menu();
     }
