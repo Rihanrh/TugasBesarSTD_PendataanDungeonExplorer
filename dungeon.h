@@ -1,7 +1,9 @@
 #ifndef DUNGEON_H_INCLUDED
 #define DUNGEON_H_INCLUDED
+
 #include <iostream>
 using namespace std;
+
 #define info(P) (P)->info
 #define next(P) (P)->next
 #define nextPD(P) (P)->nextPD
@@ -11,7 +13,6 @@ using namespace std;
 struct player{
     string playerName;
     int playerAge;
-    string inventory[99];
     int playerRank;
 };
 
@@ -54,13 +55,14 @@ adrP searchPlayer(ListPlayer P, string playerName);
 
 void createListDungeon (ListDungeon &D);
 adrD createElemenDungeon (infotype2 id);
-//void insertLastDungeon (ListDungeon &D, adrD ad);
-void insertDungeon(ListPlayer &P, string playerName, adrD ad);
+void insertDungeon(ListDungeon &D, adrD ad);
 int countDungeon(ListPlayer P, string playerName, adrD ad);
+adrD searchDungeon(ListDungeon D, string d_Name);
+void deleteLastDungeon(ListPlayer &P, string playerName, adrD ad);
 
-void showAll(ListPlayer P, ListDungeon D);
-bool cekInventoryEmpty(string inventory[99]);
-bool cekRewardEmpty(string reward[99]);
+void connectPlayerDungeon(ListPlayer &P, ListDungeon D, string playerName, string d_Name);
+
+void showAll(ListPlayer P);
 int menu();
 
 #endif // DUNGEON_H_INCLUDED
