@@ -239,7 +239,7 @@ int countDungeon(ListPlayer P, string playerName, adrD ad){
 }
 
 // Menghapus Dungeon pada Player tertentu
-void deleteLastDungeon(ListPlayer &P, string playerName, adrD &ad){
+void deleteLastDungeon(ListPlayer &P, string playerName, adrD ad){
     adrP SP = searchPlayer(P, playerName);
 
     adrD delD = nextPD(SP);

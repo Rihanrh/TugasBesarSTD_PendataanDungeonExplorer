@@ -58,7 +58,7 @@ adrD createElemenDungeon (infotype2 id);
 void insertDungeon(ListDungeon &D, adrD ad);
 int countDungeon(ListPlayer P, string playerName, adrD ad);
 adrD searchDungeon(ListDungeon D, string d_Name);
-void deleteLastDungeon(ListPlayer &P, string playerName, adrD &ad);
+void deleteLastDungeon(ListPlayer &P, string playerName, adrD ad);
 
 void connectPlayerDungeon(ListPlayer &P, ListDungeon D, string playerName, string d_Name);
 
